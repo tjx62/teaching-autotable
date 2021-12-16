@@ -1,8 +1,6 @@
 
 all: files
 
-SERVER = pwmarcz.pl
-
 TEXTURES = img/sticks.auto.png img/tiles.auto.png img/tiles.washizu.auto.png img/center.auto.png img/winds.auto.png
 
 ICONS = img/icon-16.auto.png img/icon-32.auto.png img/icon-96.auto.png
@@ -59,13 +57,6 @@ staging: build
 release: build
 	git push -f origin @:refs/heads/release/client
 	rsync -rva --checksum --delete build/ $(SERVER):autotable/dist/
-
-.PHONY: release-server
-release-server: build-server
-	git push -f origin @:refs/heads/release/server
-	rsync -rva --checksum --delete --exclude node_modules/ server/ $(SERVER):autotable/server/
-	ssh $(SERVER) 'cd autotable/server && yarn'
-	ssh $(SERVER) 'sudo systemctl restart autotable-server.service'
 
 .PHONY:
 test:

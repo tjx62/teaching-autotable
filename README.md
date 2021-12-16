@@ -1,9 +1,20 @@
+# riichi.moe Fork
+
+This is a fork of the original autotable project. Extra features include:
+* Washizu mode
+* Face down discarding for yami mahjong
+* Spectator mode
+* Room passwords for spectating and playing
+* Some minor bug fixes
+
+The documentation below is somewhat out of date, but you can still get the project running locally with make as described.
+
 # Autotable
 
 Autotable is a tabletop simulator for Riichi Mahjong.
 
-* Game: https://pwmarcz.pl/autotable/
-* About page: https://pwmarcz.pl/autotable/about.html
+* Game: https://autotable.riichi.moe/
+* About page: https://autotable.riichi.moe/about
 * Blog post: https://pwmarcz.pl/blog/autotable/
 
 ## Running
