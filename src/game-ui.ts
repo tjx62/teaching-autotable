@@ -64,7 +64,7 @@ export class GameUi {
     akaText: HTMLInputElement;
     points: HTMLSelectElement;
     nick: HTMLInputElement;
-    removeSpectatorPassword: HTMLButtonElement;
+    toggleSpectatorPassword: HTMLButtonElement;
     spectatorPassword: HTMLInputElement;
     spectate: HTMLButtonElement;
     stopSpectate: HTMLButtonElement;
@@ -109,7 +109,7 @@ export class GameUi {
       akaText: document.getElementById('aka-text') as HTMLInputElement,
       points: document.getElementById('points') as HTMLSelectElement,
       nick: document.getElementById('nick')! as HTMLInputElement,
-      removeSpectatorPassword: document.getElementById('remove-spectator-password') as HTMLButtonElement,
+      toggleSpectatorPassword: document.getElementById('toggle-spectator-password') as HTMLButtonElement,
       spectatorPassword: document.getElementById('spectator-password') as HTMLInputElement,
       spectate: document.getElementById('spectate')! as HTMLButtonElement,
       stopSpectate: document.getElementById('stop-spectate')! as HTMLButtonElement,
@@ -156,7 +156,7 @@ export class GameUi {
     this.elements.toggleHonba.onclick = () => this.world.toggleHonba();
 
     this.client.spectators.on('optionsChanged', (options) => {
-      this.elements.removeSpectatorPassword.innerText = `${options.writeProtected ? "Remove" : "Add"} Spectator Password`;
+      this.elements.toggleSpectatorPassword.innerText = `${options.writeProtected ? "Remove" : "Add"} Spectator Password`;
     });
 
     this.client.seats.on('update', this.updateSeats.bind(this));
@@ -277,7 +277,7 @@ export class GameUi {
       reader.readAsDataURL(input.files[0]);
     };
 
-    this.elements.removeSpectatorPassword.onclick = () => {
+    this.elements.toggleSpectatorPassword.onclick = () => {
       this.client.auth(this.elements.spectatorPassword.value).then(isAuthed => {
         if (!isAuthed) {
           return;
