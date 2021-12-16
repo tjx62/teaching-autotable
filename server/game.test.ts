@@ -6,6 +6,8 @@ class TestClient {
   game: Game | null = null;
   playerId: string | null = null;
   sent: Array<Message> = [];
+  heartbeatIntervalId = setTimeout(() => {} , 0);
+  isAlive = false;
 
   isAuthed: boolean = false;
   send(msg: string): void {

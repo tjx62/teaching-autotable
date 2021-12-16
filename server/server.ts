@@ -23,6 +23,20 @@ export class Server {
       const client = ws as WebSocketClient;
       client.game = null;
       client.playerId = null;
+      client.isAlive = true;
+
+      client.heartbeatIntervalId = setInterval(() => {
+        if (!client.isAlive) {
+          client.terminate();
+        }
+
+        client.isAlive = false;
+        client.ping();
+      }, 15000);
+
+      client.on("pong", () => {
+        client.isAlive = true;
+      });
 
       client.on('message', data => {
         if (client.game !== null) {
@@ -49,6 +63,7 @@ export class Server {
 
       client.on('close', () => {
         console.debug('> disconnect');
+        clearInterval(client.heartbeatIntervalId);
         this.onClose(client);
       });
     });

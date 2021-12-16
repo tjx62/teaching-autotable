@@ -6,6 +6,8 @@ export type Client = {
   game: Game | null;
   isAuthed: boolean;
   playerId: string | null;
+  isAlive: boolean;
+  heartbeatIntervalId: NodeJS.Timeout;
   send(data: string): void;
 }
 
