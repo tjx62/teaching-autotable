@@ -25,6 +25,7 @@ COPY img/* ./img/
 RUN make files
 
 FROM node:12.18 AS parcel
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
     make
 
@@ -38,3 +39,4 @@ RUN make -o files build
 FROM nginx
 COPY --from=parcel /build/build /dist
 COPY ./nginx.conf /etc/nginx/nginx.conf
+
